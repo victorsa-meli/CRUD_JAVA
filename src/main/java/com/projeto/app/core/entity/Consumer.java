@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -21,18 +22,21 @@ public class Consumer {
     private Long id;
 
     @Column
-    @NotNull
+    @NotBlank
     private String name;
 
     @CPF
     @Column
-    @NotNull
+    @NotBlank
     private String cpf;
 
     @Email
     @Column
-    @NotNull
+    @NotBlank
     private String email;
+
+    @NotBlank
+    private String cep;
 
 
     @OneToMany(cascade = CascadeType.PERSIST)
