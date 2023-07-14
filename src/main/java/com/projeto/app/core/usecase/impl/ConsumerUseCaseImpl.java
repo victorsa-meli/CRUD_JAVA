@@ -6,7 +6,6 @@ import com.projeto.app.core.entity.Consumer;
 import com.projeto.app.core.repository.ConsumerRepository;
 import com.projeto.app.core.usecase.ConsumerUseCase;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
