@@ -54,30 +54,23 @@ public class ConsumerUseCaseImpl implements ConsumerUseCase {
 
     @Override
     public Consumer updateConsumer(Consumer consumer) throws Exception {
-
         Optional<Consumer> consumerCPF = consumerRepository.findByCpf(consumer.getCpf());
 
+        if (consumerCPF.isPresent()) {
+            Consumer consumerDataBase = consumerCPF.get();
 
-        if (consumerCPF.isEmpty()) {
+            consumerDataBase.setName(consumer.getName());
+            consumerDataBase.setEmail(consumer.getEmail());
+            consumerDataBase.setCep(consumer.getCep());
 
-            throw new Exception("CPF não encontrado!");
+            return consumerRepository.save(consumerDataBase);
+
         }
 
-        if (!consumerCPF.get().getCpf().equals(consumer.getCpf())) {
+        throw new Exception("CPF não encontrado!");
 
-            throw new Exception("CPF não pode ser alterado!");
-        }
-
-        if (!consumer.getId().equals(consumerCPF.get().getId())) {
-
-            throw new Exception("ID não pode ser alterado!");
-        }
-
-        consumerCPF.get().setCardlist(consumer.getCardlist());
-
-
-        return consumerRepository.save(consumerCPF.get());
     }
+
 
     @Override
     public void deleteConsumer(Consumer consumer) throws Exception {
