@@ -13,7 +13,7 @@ public interface ConsumerRouter {
 
     ResponseEntity <Consumer> updateConsumer(Consumer consumer) throws Exception;
 
-    ResponseEntity<?> deleteConsumer(Consumer consumer) throws Exception;
+    void deleteConsumer(Consumer consumer) throws Exception;
 
 
 }

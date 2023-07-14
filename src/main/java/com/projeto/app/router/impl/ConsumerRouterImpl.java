@@ -42,9 +42,9 @@ public class ConsumerRouterImpl implements ConsumerRouter {
 
     @Override
     @DeleteMapping
-    public ResponseEntity<?> deleteConsumer(@RequestBody Consumer consumer) throws Exception {
+    public void deleteConsumer(@RequestBody Consumer consumer) throws Exception {
 
-        return ResponseEntity.status(HttpStatus.FOUND).body(consumerUseCase.deleteConsumer(consumer));
+        consumerUseCase.deleteConsumer(consumer);
 
     }
 }

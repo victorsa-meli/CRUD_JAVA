@@ -21,10 +21,8 @@ public class Card {
     private Long id;
 
     private String numeroCartao;
-    private String senha;
     private Double saldo;
     private CardType cardType;
-
 
 
 }
