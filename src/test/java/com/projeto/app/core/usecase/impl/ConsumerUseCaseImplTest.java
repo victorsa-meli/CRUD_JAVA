@@ -66,5 +66,12 @@ class ConsumerUseCaseImplTest {
     }
 
 
+    //TODO - Implementar testes para o método updateConsumer
+
+    //TODO - Implementar testes para o método deleteConsumer
+
+    //TODO - Implementar testes para o método getConsumer
+
+
 
 }
