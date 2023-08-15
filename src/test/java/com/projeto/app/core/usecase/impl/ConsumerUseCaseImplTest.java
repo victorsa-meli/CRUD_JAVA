@@ -4,7 +4,6 @@ import com.projeto.app.core.entity.Consumer;
 import com.projeto.app.core.repository.ConsumerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -29,7 +28,6 @@ class ConsumerUseCaseImplTest {
     }
 
 
-
     @Test
     public void test_createConsumer() throws Exception {
         // Create a consumer
@@ -50,31 +48,28 @@ class ConsumerUseCaseImplTest {
         // Assert that the consumer was created successfully
         assertEquals("Mango Joe", createdConsumer.getName());
         assertEquals("691.805.560-78", createdConsumer.getCpf());
-        assertEquals("teste@email.com",createdConsumer.getEmail());
+        assertEquals("teste@email.com", createdConsumer.getEmail());
     }
 
     @Test
-    public void when_consumerCpf_already_exist() throws Exception {
-        // Create a consumer
+    public void when_consumerCpf_already_exist() {
         Consumer consumer = new Consumer();
         consumer.setCpf("691.805.560-78");
 
         when(consumerRepository.findByCpf(consumer.getCpf())).thenReturn(java.util.Optional.of(consumer));
 
-        assertThrows(Exception.class, () -> {
-            consumerUseCaseImpl.createConsumer(consumer);
-        });
+        assertThrows(Exception.class, () -> consumerUseCaseImpl.createConsumer(consumer));
 
 
     }
 
 
     @Test
-    public void when_consumer_updated_success() throws Exception{
+    public void when_consumer_updated_success() throws Exception {
 
 
         //TODO 1 -CRIAR O OBJETO A SER TESTADO
-        Consumer consumerEditado =new Consumer();
+        Consumer consumerEditado = new Consumer();
         consumerEditado.setName("Mango Joe");
         consumerEditado.setCpf("691.805.560-78");
         consumerEditado.setEmail("emailAtualizado@email.com");
@@ -96,38 +91,34 @@ class ConsumerUseCaseImplTest {
 
 
         //TODO 4- ASEGURAR OS RESULTADOS ESPERADOS
-        assertEquals("emailAtualizado@email.com",consumidorAtualizado.getEmail());
+        assertEquals("emailAtualizado@email.com", consumidorAtualizado.getEmail());
         assertEquals("987654321", consumidorAtualizado.getCep());
-
-
-        }
-
-
-
-    @Test
-    public void when_consumer_updated_already_exist() throws Exception{
-
-        // Create a consumer
-        Consumer consumer = new Consumer();
-        consumer.setCpf("691.805.560-78");
-
-        when(consumerRepository.findByCpf(consumer.getCpf())).thenReturn(java.util.Optional.of(consumer));
-
-        assertThrows(Exception.class, () -> {
-            consumerUseCaseImpl.updateConsumer(consumer);
-        });
 
 
     }
 
 
+    @Test
+    public void when_consumer_updated_already_exist() {
 
+        // Create a consumer
+        Consumer consumer = new Consumer();
+        consumer.setCpf("691.805.560-78");
+
+        Optional<Consumer> emptyConsumer = Optional.empty();
+
+        when(consumerRepository.findByCpf(consumer.getCpf())).thenReturn(emptyConsumer);
+
+        assertThrows(Exception.class, () -> consumerUseCaseImpl.updateConsumer(consumer));
+
+
+
+    }
 
 
     //TODO - Implementar testes para o método deleteConsumer
 
     //TODO - Implementar testes para o método getConsumer
-
 
 
 }
