@@ -59,7 +59,6 @@ public class ConsumerUseCaseImpl implements ConsumerUseCase {
         if (consumerCPF.isPresent()) {
             Consumer consumerDataBase = consumerCPF.get();
 
-            consumerDataBase.setName(consumer.getName());
             consumerDataBase.setEmail(consumer.getEmail());
             consumerDataBase.setCep(consumer.getCep());
 
