@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class ConsumerUseCaseImplTest {
@@ -112,13 +114,49 @@ class ConsumerUseCaseImplTest {
         assertThrows(Exception.class, () -> consumerUseCaseImpl.updateConsumer(consumer));
 
 
+    }
+
+
+    @Test
+    public void when_delete_consumer_success() throws Exception {
+
+        Consumer consumer = new Consumer();
+        consumer.setId(1L);
+
+        Optional<Consumer> foundConsumer = Optional.of(consumer);
+
+        when(consumerRepository.findById(consumer.getId())).thenReturn(foundConsumer);
+
+        consumerUseCaseImpl.deleteConsumer(consumer);
+
+        verify(consumerRepository).findById(1L);
+
+        verify(consumerRepository).delete(consumer);
 
     }
 
 
-    //TODO - Implementar testes para o método deleteConsumer
+    @Test
+    public void when_delete_consumer_not_found() {
 
-    //TODO - Implementar testes para o método getConsumer
+        Consumer consumer = new Consumer();
+        when(consumerRepository.findById(anyLong())).thenReturn(Optional.empty());
 
+        assertThrows(Exception.class, () -> consumerUseCaseImpl.deleteConsumer(consumer));
+
+    }
+
+    @Test
+    public void when_getAll_consumers()  {
+        consumerUseCaseImpl.getallConsumer();
+        verify(consumerRepository).findAll();
+    }
+
+    @Test
+    public void testGetRandomCreditCard() {
+        String creditCard = ConsumerUseCaseImpl.getRandomCreditCard();
+        assertNotNull(creditCard);
+        assertEquals(19, creditCard.length());
+    }
 
 }

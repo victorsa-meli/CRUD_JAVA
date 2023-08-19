@@ -80,12 +80,12 @@ public class ConsumerUseCaseImpl implements ConsumerUseCase {
             throw new Exception("ID não encontrado!");
         }
 
-        consumerRepository.delete(consumer);
 
+        consumerRepository.delete(consumer);
     }
 
     @Override
-    public List<Consumer> getallConsumer() throws Exception {
+    public List<Consumer> getallConsumer()  {
 
         return consumerRepository.findAll();
     }
@@ -96,14 +96,12 @@ public class ConsumerUseCaseImpl implements ConsumerUseCase {
 
         String creditCard = String.format("%.16f", number).substring(2);
 
-        // Format the credit card number
-        String formattedCreditCard = String.format("%s-%s-%s-%s",
-                creditCard.substring(0, 4),
-                creditCard.substring(4, 8),
-                creditCard.substring(8, 12),
-                creditCard.substring(12));
-
-        return formattedCreditCard;
+        return
+                String.format("%s-%s-%s-%s",
+                        creditCard.substring(0, 4),
+                        creditCard.substring(4, 8),
+                        creditCard.substring(8, 12),
+                        creditCard.substring(12));
     }
 
 }
